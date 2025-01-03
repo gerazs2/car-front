@@ -4,6 +4,7 @@ import { CarResponse } from "../types/types";
 import { DataGrid, GridColDef, GridCellParams } from "@mui/x-data-grid";
 //import axios from "axios";
 import { getCars, deleteCar } from "../api/carapi";
+import AddCar from "./AddCar";
 
 import Snackbar from "@mui/material/Snackbar";
 function CarList() {
@@ -65,6 +66,7 @@ function CarList() {
   } else {
     return (
       <>
+      <AddCar/>
         <DataGrid
           rows={data}
           columns={columns}
