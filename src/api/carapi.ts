@@ -22,3 +22,13 @@ export const deleteCar = async (link: string): Promise<CarResponse> =>
     
     return response.data;
    }
+
+   export const updateCar = async (carEntry: CarEntry): Promise<CarResponse> => {
+    const response = await axios.put(carEntry.url, carEntry.car, {
+      headers: {
+      'Content-Type': 'application/json'
+      },
+    });
+  
+    return response.data;
+  }
