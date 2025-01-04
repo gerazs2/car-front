@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { CarResponse } from "../types/types";
-import { DataGrid, GridColDef, GridCellParams } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridCellParams, GridToolbar } from "@mui/x-data-grid";
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 //import axios from "axios";
 import { getCars, deleteCar } from "../api/carapi";
 import AddCar from "./AddCar";
-
 import Snackbar from "@mui/material/Snackbar";
 import EditCar from "./EditCar";
+import { Tooltip } from "@mui/material";
 function CarList() {
   const [open, setOpen] = useState(false);
 
@@ -58,14 +61,17 @@ function CarList() {
       filterable: false,
       disableColumnMenu: true,
       renderCell: (params: GridCellParams) => (
-        <button onClick={() => {
+       <Tooltip title='Delete car'>
+         <IconButton aria-label='delete' size='small'
+         onClick={() => {
             if (window.confirm(`Are you sure you want to delete ${params.row.brand} ${params.row.model}?`)) {
               mutate(params.row._links.car.href);
             } 
           }}       
         >
-          Delete
-        </button>
+          <DeleteIcon fontSize='small'/>
+        </IconButton>
+        </Tooltip>
       ),
     },
   ]; 
@@ -83,6 +89,7 @@ function CarList() {
           columns={columns}
           disableRowSelectionOnClick={true}
           getRowId={(row) => row._links.self.href}
+          slots={{ toolbar: GridToolbar }}
         />
         <Snackbar
           open={open}

@@ -4,6 +4,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import Button from '@mui/material/Button';
 import { Car } from "../types/types";
 import { addCar } from '../api/carapi';
 import CarDialogContent from './CarDialogContent';
@@ -50,13 +51,13 @@ function AddCar() {
 
   return(
     <>
-      <button onClick={handleClickOpen}>New Car</button>
+      <Button onClick={handleClickOpen}>New Car</Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>New car</DialogTitle>
           <CarDialogContent car={car} handleChange={handleChange} />
         <DialogActions>
-        <button onClick={handleClose}>Cancel</button>
-        <button onClick={handleSave}>Save</button>
+        <Button onClick={handleClose}>Cancel</Button>
+        <Button onClick={handleSave}>Save</Button>
         </DialogActions>
       </Dialog>
     </>
